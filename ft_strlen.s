@@ -3,15 +3,13 @@ bits 64
 section .text
     global ft_strlen
     ft_strlen:
-        mov rdi, rax
         xor rcx, rcx
-        while1:
-            cmp byte [rdi], 0
-            je endwhile1
+        .count_loop:
+            cmp byte [rdi + rcx], 0
+            je .end
             inc rcx
-            inc rdi
-            jmp while1
+            jmp .count_loop
 
-        endwhile1:
+        .end:
             mov rax, rcx
             ret
