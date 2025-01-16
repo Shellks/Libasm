@@ -1,11 +1,14 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <errno.h>
 
 // libasm function
-size_t ft_strlen(const char *s);
-char *ft_strcpy(char *dst, const char *src);
-int ft_strcmp(const char *s1, const char *s2);
 ssize_t ft_write(int fd, const void *buf, size_t count);
+ssize_t ft_read(int fd, void *buf, size_t count);
+int ft_strcmp(const char *s1, const char *s2);
+char *ft_strcpy(char *dst, const char *src);
+size_t ft_strlen(const char *s);
+char *ft_strdup(const char *s);
 
 int main(void) {
     printf("----------------------------------\n");
@@ -25,7 +28,7 @@ int main(void) {
         printf("----\n");
         const char src[13] = "Hello";
         printf(" | -> Original string \'%s\'\n", src);
-        const char dst[13];
+        char dst[13];
         printf(" | -> Copied string \'%s\'\n", ft_strcpy(dst, src));
     }
     printf("----------------------------------\n");
@@ -51,6 +54,31 @@ int main(void) {
         printf("----\n");
         const char str1[5] = "Test";
         printf(" | -> Sending \'%s\' to ft_write\n", str1);
+        int result = ft_write(1, "Test", 4);
+        printf(" | -> result of ft_write is \'%d\'\n", result);
+        printf(" | -> errno return is \'%d\'\n", errno);
+    }
+    printf("----------------------------------\n");
+    // ----------> TEST for ft_read.s <---------- //
+    {
+        printf("TEST -- ft_read \n");
+        printf("----\n");
+        int size = 10;
+        char str[size];
+        printf(" | -> sending a buffer of \'%d\' to ft_read :\n", size);
+        int result = ft_read(0, str, 4);
+        printf(" | -> result of ft_read is \'%d\'\n", result);
+        printf(" | -> errno return is \'%d\'\n", errno);
+    }
+    printf("----------------------------------\n");
+    // ----------> TEST for ft_strdup.s <---------- //
+    {
+        printf("TEST -- ft_strdup \n");
+        printf("----\n");
+        const char str1[10] = "test";
+        printf(" | -> Sending \'%s\' to ft_strdup\n", str1);
+        char *str2 = ft_strdup(str1);
+        printf(" | -> result of ft_strdup is \'%s\'\n", str2);
     }
     printf("----------------------------------\n");
     return 0;

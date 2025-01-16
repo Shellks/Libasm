@@ -4,9 +4,9 @@ extern __errno_location
 STDOUT equ 1
 
 section .text
-    global ft_write
-    ft_write:
-        mov rax, 1
+    global ft_read
+    ft_read:
+        mov rax, 0
         syscall
         cmp rax, 0
         jl .error

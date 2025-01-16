@@ -6,7 +6,10 @@ OBJS_DIR = .objs/
 
 SRCS =	ft_strlen.s \
 		ft_strcpy.s \
-		ft_strcmp.s
+		ft_strcmp.s \
+		ft_write.s \
+		ft_read.s \
+		ft_strdup.s
 
 OBJS = $(addprefix $(OBJS_DIR), $(SRCS:.s=.o))
 
@@ -23,7 +26,7 @@ $(NAME): $(OBJS)
 	echo "\033[1;32m-> Success !\033[1;33m libasm created"
 
 run: all
-	gcc main.c libasm.a -o main && ./main
+	gcc -Wall -Werror -Wextra main.c libasm.a -o main && ./main
 
 clean:
 	echo "\033[1;31m-> Cleaning All objects.."
