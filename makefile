@@ -25,7 +25,7 @@ $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
 	echo "\033[1;32m-> Success !\033[1;33m libasm created"
 
-run: all
+test: all
 	gcc -Wall -Werror -Wextra main.c libasm.a -o main && ./main
 
 clean:
