@@ -26,7 +26,10 @@ $(NAME): $(OBJS)
 	echo "\033[1;32m-> Success !\033[1;33m libasm created"
 
 test: all
-	gcc -Wall -Werror -Wextra main.c libasm.a -o main && ./main
+	gcc -Wall -Werror -Wextra main.c libasm.a -o tester
+
+run: all
+	gcc -Wall -Werror -Wextra main.c libasm.a -o tester && ./tester
 
 clean:
 	echo "\033[1;31m-> Cleaning All objects.."
@@ -35,14 +38,13 @@ clean:
 fclean: clean
 	echo "\033[1;31m-> Cleaning Executable.."
 	rm -f $(NAME)
-	rm -f main
+	rm -f tester
 
 re: fclean all
 
-# Create object directory if necessary
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
 
 .SILENT:
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test run

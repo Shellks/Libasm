@@ -1,9 +1,10 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <errno.h>
-#include <string.h>  // Pour comparer avec les fonctions libc
-#include <stdlib.h>  // malloc, free
+#include <stdio.h>  // printf
+#include <unistd.h> // write, read
+#include <errno.h>  // errno
+#include <string.h> // compare with original functions
+#include <stdlib.h> // malloc, free
 
+// Color codes for terminal output
 #define RED     "\033[0;31m"
 #define GREEN   "\033[0;32m"
 #define YELLOW  "\033[0;33m"
@@ -12,18 +13,43 @@
 #define CYAN    "\033[0;36m"
 #define RESET   "\033[0m"
 
-// Déclarations des fonctions asm
-ssize_t ft_write(int fd, const void *buf, size_t count);
+// ASM functions prototypes
+size_t  ft_strlen(const char *s); 
+char    *ft_strdup(const char *s);
+char    *ft_strcpy(char *dst, const char *src);
 ssize_t ft_read(int fd, void *buf, size_t count);
-int ft_strcmp(const char *s1, const char *s2);
-char *ft_strcpy(char *dst, const char *src);
-size_t ft_strlen(const char *s);
-char *ft_strdup(const char *s);
+int     ft_strcmp(const char *s1, const char *s2);
+ssize_t ft_write(int fd, const void *buf, size_t count);
 // __attribute__((nonnull(1)))
 
+
+// Function prototypes for tests
+void test_ft_strlen(void);
+void test_ft_strcpy(void);
+void test_ft_strcmp(void);
+void test_ft_write(void);
+void test_ft_read(void);
+void test_ft_strdup(void);
+
+// Main function to run all tests
+int main(void) {
+    printf(PURPLE "\n======== LIBASM TESTS ========\n\n" RESET);
+
+    test_ft_strlen();
+    test_ft_strcpy();
+    test_ft_strcmp();
+    test_ft_write();
+    test_ft_read();
+    test_ft_strdup();
+
+    printf(PURPLE "======== END OF TESTS ========\n\n" RESET);
+    return 0;
+}
+
+
+// Test functions implementations
 void test_ft_strlen(void) {
     printf(PURPLE "=== TESTING ft_strlen ===\n\n" RESET);
-
     const char *tests[] = {
         "",
         "a",
@@ -116,7 +142,7 @@ void test_ft_write(void) {
 }
 
 void test_ft_read(void) {
-    printf(PURPLE "=== TESTING ft_read ===\n" RESET);
+    printf(PURPLE "=== TESTING ft_read ===\n\n" RESET);
 
     char buf[20];
 
@@ -143,7 +169,7 @@ void test_ft_read(void) {
 }
 
 void test_ft_strdup(void) {
-    printf(PURPLE "=== TESTING ft_strdup ===\n" RESET);
+    printf(PURPLE "=== TESTING ft_strdup ===\n\n" RESET);
 
     const char *tests[] = {
         "",
@@ -164,18 +190,4 @@ void test_ft_strdup(void) {
         free(dup);
     }
     printf("\n");
-}
-
-int main(void) {
-    printf(PURPLE "======== LIBASM TESTS ========\n\n" RESET);
-
-    test_ft_strlen();
-    test_ft_strcpy();
-    test_ft_strcmp();
-    test_ft_write();
-    test_ft_read();
-    test_ft_strdup();
-
-    printf(PURPLE "======== END OF TESTS ========\n" RESET);
-    return 0;
 }

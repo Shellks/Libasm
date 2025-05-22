@@ -97,3 +97,19 @@ ft_strdup :
 	
 _____________________________________________________________________________________
 
+Makefile :
+
+ar : utilitaire GNU pour manipuler des fichiers .a (archives).
+
+rcs :
+	- r : remplace ou insère un fichier dans l’archive,
+	- c : crée l’archive si elle n’existe pas,
+	- s : ajoute un index (symbole) pour la rapidité d’accès.
+
+$(CC) → nasm
+
+-f elf64 → format de sortie pour du code 64 bits Linux.
+
+$< → le fichier source (par exemple ft_strlen.s)
+
+-o $@ → fichier cible (.objs/ft_strlen.o)
